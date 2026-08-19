@@ -3,38 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="FlowPilot is a working browser-based workflow automation demo by Yidel Brown." />
-  <title>FlowPilot — Workflow Automation Demo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="FlowPilot is a complete browser-based workflow automation showcase by Yidel Brown." />
+  <title>FlowPilot — Visual Workflow Automation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="enhancements.css" />
   <script src="app.js" defer></script>
 </head>
 <body>
   <aside class="sidebar">
-    <a class="logo" href="../../">F<span>P</span></a>
-    <nav><button class="active" aria-label="Dashboard">⌂</button><button aria-label="Workflows">⌁</button><button aria-label="Activity">◫</button></nav>
-    <a class="back" href="../../" aria-label="Back to portfolio">←</a>
+    <a class="logo" href="../../" aria-label="FlowPilot home">F<span>P</span></a>
+    <nav aria-label="Workspace navigation">
+      <button class="active" data-target="top" aria-label="Dashboard"><span>⌂</span><b>Overview</b></button>
+      <button data-target="workflows" aria-label="Workflows"><span>⌁</span><b>Workflows</b></button>
+      <button data-target="templates" aria-label="Templates"><span>✦</span><b>Templates</b></button>
+      <button data-target="activity" aria-label="Activity"><span>◫</span><b>Activity</b></button>
+    </nav>
+    <div class="sidebar-note"><i></i><span>Workspace online<small>Saved in this browser</small></span></div>
+    <a class="back" href="../../">← Portfolio</a>
   </aside>
-  <main>
-    <header><div><small>SELF-INITIATED PRACTICE PROJECT</small><h1>Workflow overview</h1><p>Build, run, and monitor lightweight business automations.</p></div><button class="primary" id="new-flow">+ New workflow</button></header>
-    <section class="metrics"><article><span>Active workflows</span><strong id="active-count">0</strong><small>Ready to run</small></article><article><span>Runs completed</span><strong id="run-count">0</strong><small>Saved locally</small></article><article><span>Estimated time saved</span><strong><span id="hours-saved">0</span>h</strong><small>Across all runs</small></article></section>
-    <section class="flow-builder panel">
-      <div class="builder-head"><div><small>VISUAL AUTOMATION</small><h2>New customer welcome flow</h2><p>See each step of the automation, then run a live test.</p></div><div><span class="saved">● All changes saved</span><button id="test-flow">▶ Run test</button></div></div>
-      <div class="canvas">
-        <article class="node trigger"><span>TRIGGER</span><i>↯</i><div><b>New form response</b><small>Website enquiry form</small></div><em>✓</em></article><div class="path"><i></i><span>instantly</span></div>
-        <article class="node condition"><span>CONDITION</span><i>⌘</i><div><b>Lead has an email</b><small>Continue if email is present</small></div><em>✓</em></article><div class="path"><i></i><span>if yes</span></div>
-        <article class="node action"><span>ACTION</span><i>✉</i><div><b>Send welcome email</b><small>Personalised response template</small></div><em>✓</em></article>
-      </div>
-      <div class="builder-foot"><span><i></i> Trigger</span><span><i></i> Condition</span><span><i></i> Action</span><b>Estimated saving: 8 minutes per lead</b></div>
+
+  <main id="top">
+    <header class="page-head">
+      <div><span class="eyebrow">SELF-INITIATED PRODUCT SHOWCASE</span><h1>Good morning, Yidel.</h1><p>Build, test, and monitor practical business automations from one workspace.</p></div>
+      <div class="head-actions"><button class="secondary" id="reset-demo">Reset demo</button><button class="primary" id="new-flow">+ New workflow</button></div>
+    </header>
+
+    <section class="metrics" aria-label="Automation metrics">
+      <article><div><span>Active workflows</span><strong id="active-count">0</strong><small><i class="up">↗</i> Ready to run</small></div><div class="spark blue"><i></i><i></i><i></i><i></i><i></i></div></article>
+      <article><div><span>Runs completed</span><strong id="run-count">0</strong><small><i class="up">↗</i> Across this device</small></div><div class="spark violet"><i></i><i></i><i></i><i></i><i></i></div></article>
+      <article><div><span>Estimated time saved</span><strong><span id="hours-saved">0</span>h</strong><small>Based on completed runs</small></div><div class="metric-ring"><span id="success-rate">100%</span></div></article>
     </section>
-    <section class="workspace">
-      <div class="panel"><div class="panel-title"><div><h2>Your workflows</h2><p>Toggle a workflow or run it on demand.</p></div><button id="run-all">Run active</button></div><div id="workflow-list" class="workflow-list"></div></div>
-      <div class="panel activity-panel"><div class="panel-title"><div><h2>Live activity</h2><p>Latest automation events.</p></div><button class="quiet" id="clear-log">Clear</button></div><div id="activity-list" class="activity-list"></div></div>
+
+    <section class="designer panel">
+      <div class="panel-head"><div><span class="eyebrow">LIVE AUTOMATION MAP</span><h2>New customer welcome flow</h2><p>A complete three-step flow. Run it to watch every stage complete.</p></div><div class="designer-actions"><span class="saved">● All changes saved</span><button id="test-flow">▶ Run test</button></div></div>
+      <div class="flow-canvas" id="flow-canvas">
+        <article class="node trigger"><span>01 · TRIGGER</span><div class="node-icon">↯</div><div><b>New form response</b><small>Website enquiry form</small></div><em>Ready</em></article>
+        <div class="path"><i></i><span>instantly</span></div>
+        <article class="node condition"><span>02 · CONDITION</span><div class="node-icon">⌘</div><div><b>Lead has an email</b><small>Continue when email is present</small></div><em>Ready</em></article>
+        <div class="path"><i></i><span>if yes</span></div>
+        <article class="node action"><span>03 · ACTION</span><div class="node-icon">✉</div><div><b>Send welcome email</b><small>Personalised response template</small></div><em>Ready</em></article>
+      </div>
+      <div class="designer-foot"><span><i class="trigger-dot"></i> Trigger</span><span><i class="condition-dot"></i> Condition</span><span><i class="action-dot"></i> Action</span><b>Estimated saving: 8 minutes per lead</b></div>
+    </section>
+
+    <section class="section-head" id="templates"><div><span class="eyebrow">START FASTER</span><h2>Automation templates</h2><p>Install a ready-made workflow and customise it for your business.</p></div></section>
+    <section class="templates" id="template-list"></section>
+
+    <section class="work-grid" id="workflows">
+      <article class="panel workflows-panel">
+        <div class="panel-head"><div><span class="eyebrow">YOUR LIBRARY</span><h2>Workflows</h2><p>Search, filter, edit, duplicate, or run any automation.</p></div><button id="run-all">Run all active</button></div>
+        <div class="toolbar"><label>⌕<input id="flow-search" placeholder="Search workflows" /></label><select id="flow-filter" aria-label="Filter workflows"><option value="all">All statuses</option><option value="active">Active</option><option value="paused">Paused</option></select></div>
+        <div id="workflow-list" class="workflow-list"></div>
+      </article>
+      <article class="panel activity-panel" id="activity">
+        <div class="panel-head"><div><span class="eyebrow">AUDIT TRAIL</span><h2>Recent activity</h2><p>Every test and live run is recorded locally.</p></div><div><button class="quiet" id="export-log">Export</button><button class="quiet" id="clear-log">Clear</button></div></div>
+        <div id="activity-list" class="activity-list"></div>
+      </article>
     </section>
   </main>
-  <dialog id="flow-dialog"><form method="dialog" id="flow-form"><div class="dialog-head"><div><small>NEW AUTOMATION</small><h2>Create a workflow</h2></div><button value="cancel" aria-label="Close">×</button></div><label>Workflow name<input id="flow-name" required maxlength="40" placeholder="e.g. Send weekly report" /></label><label>Trigger<select id="flow-trigger"><option>Every weekday at 9:00</option><option>When a form is submitted</option><option>When a file is uploaded</option><option>On demand</option></select></label><label>Action<select id="flow-action"><option>Send an email summary</option><option>Add a spreadsheet row</option><option>Create a follow-up task</option><option>Transform and export data</option></select></label><div class="dialog-actions"><button value="cancel">Cancel</button><button class="primary" value="default" id="save-flow">Create workflow</button></div></form></dialog>
-  <div class="toast" id="toast" role="status"></div>
+
+  <dialog id="flow-dialog">
+    <form id="flow-form">
+      <div class="dialog-head"><div><span class="eyebrow">WORKFLOW DETAILS</span><h2 id="dialog-title">Create a workflow</h2></div><button type="button" class="close-dialog" aria-label="Close">×</button></div>
+      <input type="hidden" id="flow-id" />
+      <label>Workflow name<input id="flow-name" required maxlength="48" placeholder="e.g. Send weekly report" /></label>
+      <div class="form-grid"><label>Trigger<select id="flow-trigger"><option>Every weekday at 9:00</option><option>When a form is submitted</option><option>When a file is uploaded</option><option>When stock runs low</option><option>On demand</option></select></label><label>Action<select id="flow-action"><option>Send an email summary</option><option>Add a spreadsheet row</option><option>Create a follow-up task</option><option>Transform and export data</option><option>Notify the team</option></select></label></div>
+      <label>Schedule / note<input id="flow-schedule" maxlength="60" placeholder="e.g. Weekdays · Europe/London" /></label>
+      <div class="dialog-actions"><button type="button" class="secondary close-dialog">Cancel</button><button class="primary" type="submit" id="save-flow">Save workflow</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

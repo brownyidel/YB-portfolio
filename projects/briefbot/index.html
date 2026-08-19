@@ -1,6 +1,29 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="BriefBot is a working project-discovery chatbot practice app by Yidel Brown."><title>BriefBot — Turn an Idea into a Project Brief</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head><body>
-<header><a href="../../" class="brand"><i>✦</i> briefbot</a><span>Interactive project discovery</span><a href="../../">Back to portfolio ↗</a></header>
-<main><section class="intro"><span class="label">SELF-INITIATED CHATBOT PROJECT</span><h1>A clearer brief starts with the <em>right questions.</em></h1><p>BriefBot guides you through a short project conversation, then turns your answers into a structured brief you can copy and use.</p><div class="trust"><span>✓ No sign-up</span><span>✓ Private to your browser</span><span>✓ Takes about 2 minutes</span></div></section>
-<section class="chat-card"><div class="chat-head"><div class="avatar">B</div><div><b>BriefBot</b><span><i></i> Online</span></div><button id="restart">↻ Start over</button></div><div id="messages" class="messages" aria-live="polite"></div><div id="quick-replies" class="quick-replies"></div><form id="chat-form"><input id="chat-input" autocomplete="off" placeholder="Type your answer…" aria-label="Your message"><button aria-label="Send message">↑</button></form></section>
-<section class="brief" id="brief" hidden><div class="brief-head"><div><span class="label">YOUR GENERATED BRIEF</span><h2>Ready to share</h2></div><button id="copy">Copy brief</button></div><div id="brief-content"></div><div class="brief-actions"><button id="edit">Start again</button><a href="https://www.fiverr.com/yidelbrown213" target="_blank" rel="noreferrer">Discuss this with Yidel ↗</a></div></section></main><footer><span>Designed and developed by Yidel Brown</span><span>This chatbot uses a deterministic conversation flow and stores no server data.</span></footer><div id="toast" class="toast"></div>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="BriefBot is an adaptive local project-planning assistant built by Yidel Brown." />
+  <title>BriefBot — Adaptive Project Planning Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header><a href="../../" class="brand"><i>✦</i> briefbot</a><span><i></i> Adaptive local assistant</span><div><button id="restart">↻ Start over</button><a href="../../">Portfolio ↗</a></div></header>
+
+  <main>
+    <section class="intro"><span class="label">SELF-INITIATED PRODUCT SHOWCASE</span><h1>It listens first.<br />Then builds the <em>right brief.</em></h1><p>BriefBot notices project type, goals, features, audience, budget, and timing inside natural sentences—then asks only for the important details you have not already provided.</p><div class="trust"><span>✓ Adapts each next question</span><span>✓ Remembers earlier answers</span><span>✓ Private to this browser</span></div><div class="mind-visual" aria-hidden="true"><i class="orbit orbit-one"><b></b></i><i class="orbit orbit-two"><b></b></i><div class="robot"><span class="antenna"></span><div class="robot-face"><i></i><i></i><b></b></div><small>thinking locally</small></div><span class="mind-label one">GOAL</span><span class="mind-label two">AUDIENCE</span><span class="mind-label three">SCOPE</span></div></section>
+
+    <section class="assistant-shell" id="chat"><div class="chat-card"><div class="chat-head"><div class="avatar"><span>✦</span></div><div><b>BriefBot</b><span><i></i> Ready to understand your idea</span></div><div class="progress-copy"><b id="progress-percent">0%</b><span>brief complete</span></div></div><div class="progress"><i id="progress-bar"></i></div><div id="messages" class="messages" aria-live="polite"></div><div id="quick-replies" class="quick-replies"></div><form id="chat-form"><input id="chat-input" autocomplete="off" placeholder="Describe your project…" aria-label="Your message" /><button aria-label="Send message">↑</button></form><small class="chat-note">Try a complete thought: “I need a restaurant website with bookings in four weeks for about £1,000.”</small></div>
+
+      <aside class="context-card"><div class="context-head"><span class="label">LIVE UNDERSTANDING</span><span id="memory-count">0 details</span></div><h2>What BriefBot knows</h2><div id="context-list" class="context-list"></div><div class="confidence"><div><span>Context confidence</span><b id="confidence-copy">Listening…</b></div><div><i id="confidence-bar"></i></div></div><p><i>✦</i> This panel updates as you talk. BriefBot uses these details to avoid repeating questions.</p></aside></section>
+
+    <section class="brief" id="brief" hidden><div class="brief-head"><div><span class="label">ADAPTIVE PROJECT PLAN</span><h2 id="brief-title">Your project brief</h2><p id="brief-summary"></p></div><div><button id="refine">✦ Refine with BriefBot</button><button id="copy">Copy brief</button></div></div><div class="brief-overview" id="brief-overview"></div><div class="brief-grid"><article><span class="label">RECOMMENDED FEATURES</span><div id="recommended-features" class="feature-list"></div></article><article><span class="label">DELIVERY ROADMAP</span><div id="roadmap" class="roadmap"></div></article><article><span class="label">SCOPE GUIDANCE</span><div id="scope-guidance" class="scope-guidance"></div></article></div><div class="brief-actions"><div><button id="download">Download .txt</button><button id="print">Print / Save PDF</button></div><a href="https://www.fiverr.com/yidelbrown213" target="_blank" rel="noreferrer">Discuss this plan with Yidel ↗</a></div></section>
+  </main>
+
+  <footer><span>Designed and developed by Yidel Brown</span><span>BriefBot uses adaptive local language rules—not a remote AI service—and sends no conversation data to a server.</span></footer><div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

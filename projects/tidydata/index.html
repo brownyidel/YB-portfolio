@@ -1,7 +1,41 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="TidyData is a working CSV cleaning practice app by Yidel Brown."><title>TidyData — Clean CSV Files in Your Browser</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head><body>
-<aside><a class="logo" href="../../">tidy<span>data</span></a><nav><button class="active">⌂ <span>Workspace</span></button><button>✓ <span>Quality rules</span></button><button>⇩ <span>Exports</span></button></nav><div class="privacy"><b>100% private</b><p>Your file never leaves this browser.</p></div><a class="back" href="../../">← Portfolio</a></aside>
-<main><header><div><small>SELF-INITIATED PRACTICE APP</small><h1>CSV cleaning workspace</h1><p>Import, inspect, clean, and export spreadsheet data.</p></div><div><button class="secondary" id="sample">Load sample</button><label class="upload">Import CSV<input type="file" id="file" accept=".csv,text/csv"></label></div></header>
-<section class="metrics"><article><span>Rows</span><strong id="row-count">0</strong></article><article><span>Columns</span><strong id="column-count">0</strong></article><article><span>Empty cells</span><strong id="empty-count">0</strong></article><article><span>Duplicates</span><strong id="duplicate-count">0</strong></article></section>
-<section class="workspace"><div class="source panel"><div class="panel-head"><div><h2>Source data</h2><p>Paste comma-separated values or import a file.</p></div><button id="clear">Clear</button></div><textarea id="csv-input" spellcheck="false" placeholder="name,email,company&#10;Alex,alex@example.com,North Co"></textarea><div class="rules"><h3>Cleaning rules</h3><label><input type="checkbox" id="trim" checked><span><b>Trim whitespace</b><small>Remove spaces around every value</small></span></label><label><input type="checkbox" id="duplicates" checked><span><b>Remove duplicates</b><small>Keep the first matching row</small></span></label><label><input type="checkbox" id="empty-rows" checked><span><b>Remove empty rows</b><small>Discard rows with no values</small></span></label></div><button class="primary" id="clean">Clean my data →</button></div>
-<div class="results panel"><div class="panel-head"><div><h2>Clean preview</h2><p id="result-label">No data processed yet.</p></div><button class="download" id="download" disabled>Download CSV</button></div><div class="table-wrap"><table id="preview"><tbody><tr><td class="empty">Your cleaned data will appear here.</td></tr></tbody></table></div><div id="report" class="report" hidden><div class="score"><span id="score">100</span><small>QUALITY<br>SCORE</small></div><div><b id="report-title">Your data looks good.</b><p id="report-copy"></p></div></div></div></section></main><div class="toast" id="toast"></div>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="TidyData is a private browser-based CSV profiler and cleaning workspace by Yidel Brown." />
+  <title>TidyData — Profile, Clean & Export CSV Files</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <aside>
+    <a class="logo" href="../../">tidy<span>data</span></a>
+    <nav><button class="active" data-target="workspace">⌂ <span>Workspace</span></button><button data-target="profile">◫ <span>Data profile</span></button><button data-target="exports">⇩ <span>Exports</span></button></nav>
+    <div class="privacy"><i>✓</i><div><b>Private by design</b><p>Files are processed entirely in this browser.</p></div></div>
+    <a class="back" href="../../">← Yidel’s portfolio</a>
+  </aside>
+
+  <main>
+    <header><div><span class="eyebrow">SELF-INITIATED PRODUCT SHOWCASE</span><h1>Data cleaning workspace</h1><p>Import a CSV, inspect its quality, apply repeatable rules, and export a clean dataset.</p></div><div class="header-actions"><button id="sample">Load sample</button><label class="upload">Import CSV<input type="file" id="file" accept=".csv,text/csv" /></label></div></header>
+
+    <section class="metrics" aria-label="Dataset metrics"><article><span>Data rows</span><strong id="row-count">0</strong><small id="row-note">Waiting for data</small></article><article><span>Columns</span><strong id="column-count">0</strong><small id="type-note">Not profiled</small></article><article><span>Quality issues</span><strong id="issue-count">0</strong><small id="issue-note">No analysis yet</small></article><article class="score-card"><div><span>Quality score</span><strong><span id="score">—</span><sup>/100</sup></strong><small id="score-note">Import data to begin</small></div><div class="ring" id="score-ring"></div></article></section>
+
+    <section class="workspace" id="workspace">
+      <article class="panel source-panel"><div class="panel-head"><div><span class="eyebrow">SOURCE</span><h2>Raw data</h2><p>Paste CSV text, choose a file, or drag one into this workspace.</p></div><div><button id="undo" disabled>Undo</button><button id="clear">Clear</button></div></div><div class="drop-zone" id="drop-zone"><span>Drop a CSV here</span><small>or paste data below</small></div><textarea id="csv-input" spellcheck="false" placeholder="name,email,company&#10;Alex,alex@example.com,North Co"></textarea><div class="source-foot"><label>Delimiter<select id="delimiter"><option value="auto">Auto detect</option><option value=",">Comma</option><option value=";">Semicolon</option><option value="\t">Tab</option></select></label><span id="file-name">Untitled dataset</span></div></article>
+
+      <article class="panel rules-panel"><div class="panel-head"><div><span class="eyebrow">CLEANING RECIPE</span><h2>Quality rules</h2><p>Choose exactly how TidyData should transform the dataset.</p></div><button id="select-rules">Select all</button></div><div class="rules"><label><input type="checkbox" id="trim" checked /><span><b>Trim whitespace</b><small>Remove spaces around every value</small></span></label><label><input type="checkbox" id="duplicates" checked /><span><b>Remove duplicates</b><small>Keep the first matching row</small></span></label><label><input type="checkbox" id="empty-rows" checked /><span><b>Remove empty rows</b><small>Discard rows with no values</small></span></label><label><input type="checkbox" id="headers" checked /><span><b>Standardise headers</b><small>Convert headings to clean snake_case</small></span></label><label><input type="checkbox" id="email-check" checked /><span><b>Check email fields</b><small>Flag invalid addresses in the report</small></span></label><label><input type="checkbox" id="empty-columns" /><span><b>Remove empty columns</b><small>Discard columns with no data values</small></span></label></div><button class="primary" id="clean">Profile & clean dataset →</button></article>
+    </section>
+
+    <section class="panel preview-panel"><div class="panel-head"><div><span class="eyebrow">CLEAN OUTPUT</span><h2>Dataset preview</h2><p id="result-label">No data processed yet.</p></div><div class="preview-actions"><button id="copy" disabled>Copy</button><button id="download" disabled>Export CSV</button></div></div><div class="table-wrap"><table id="preview"><tbody><tr><td class="empty">Your cleaned dataset will appear here.</td></tr></tbody></table></div><div class="preview-foot" id="preview-foot" hidden><span>Showing the first <b id="preview-count">0</b> rows</span><span>All processing happened locally</span></div></section>
+
+    <section class="analysis-grid" id="profile"><article class="panel"><div class="panel-head"><div><span class="eyebrow">COLUMN INTELLIGENCE</span><h2>Data profile</h2><p>Completeness, uniqueness, and detected type for every field.</p></div></div><div id="column-profile" class="column-profile"><div class="empty">Clean a dataset to build its profile.</div></div></article><article class="panel"><div class="panel-head"><div><span class="eyebrow">QUALITY REPORT</span><h2>Issues & fixes</h2><p>A clear record of what changed and what still needs attention.</p></div></div><div id="issue-list" class="issue-list"><div class="empty">No report available yet.</div></div></article></section>
+
+    <section class="export-panel panel" id="exports"><div><span class="eyebrow">READY TO USE</span><h2>Export your clean data</h2><p>Download CSV for spreadsheets, JSON for applications, or copy the complete dataset.</p></div><div class="export-actions"><button id="export-csv" disabled><span>CSV</span><b>Spreadsheet ready</b><small>.csv file</small></button><button id="export-json" disabled><span>{ }</span><b>Structured JSON</b><small>.json file</small></button><button id="copy-all" disabled><span>⧉</span><b>Copy to clipboard</b><small>CSV text</small></button></div></section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
