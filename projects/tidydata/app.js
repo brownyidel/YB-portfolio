@@ -38,5 +38,7 @@ function exportCSV(){if(!cleaned.length)return;download(toCSV(cleaned,','),`${cu
 function exportJSON(){if(!cleaned.length)return;const [headers,...rows]=cleaned;const objects=rows.map(row=>Object.fromEntries(headers.map((header,index)=>[header,row[index]||''])));download(JSON.stringify(objects,null,2),`${currentName.replace(/\.csv$/i,'')}-clean.json`,'application/json');toast('JSON file downloaded');}
 async function copyAll(){if(!cleaned.length)return;await navigator.clipboard.writeText(toCSV(cleaned,','));toast('Clean data copied');}
 document.getElementById('download').onclick=exportCSV;document.getElementById('export-csv').onclick=exportCSV;document.getElementById('export-json').onclick=exportJSON;document.getElementById('copy').onclick=copyAll;document.getElementById('copy-all').onclick=copyAll;
-document.querySelectorAll('aside nav button').forEach(button=>button.onclick=()=>{document.querySelectorAll('aside nav button').forEach(item=>item.classList.remove('active'));button.classList.add('active');document.getElementById(button.dataset.target).scrollIntoView({behavior:'smooth',block:'start'});});
+function showView(view,updateUrl=true){const valid=['workspace','profile','exports'];const selected=valid.includes(view)?view:'workspace';document.querySelectorAll('.app-view').forEach(section=>section.hidden=section.id!==`${selected}-view`);document.querySelectorAll('aside nav button').forEach(button=>button.classList.toggle('active',button.dataset.view===selected));if(updateUrl)history.replaceState(null,'',`#${selected}`);window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('aside nav button').forEach(button=>button.onclick=()=>showView(button.dataset.view));
+showView(location.hash.slice(1),false);
 updateSourceMetrics();

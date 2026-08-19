@@ -73,5 +73,7 @@ document.getElementById('export-log').onclick=()=>{if(!state.activity.length)ret
 document.getElementById('reset-demo').onclick=()=>{if(confirm('Reset this local FlowPilot workspace to the sample data?')){state=cloneDefaults();save();render();toast('Demo workspace reset');}};
 document.getElementById('flow-search').oninput=render;document.getElementById('flow-filter').onchange=render;
 function download(content,name,type){const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([content],{type}));link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),0);}
-document.querySelectorAll('.sidebar nav button').forEach(button=>button.onclick=()=>{document.querySelectorAll('.sidebar nav button').forEach(item=>item.classList.remove('active'));button.classList.add('active');document.getElementById(button.dataset.target).scrollIntoView({behavior:'smooth',block:'start'});});
+function showView(view,updateUrl=true){const valid=['overview','workflows','templates','activity'];const selected=valid.includes(view)?view:'overview';document.querySelectorAll('.app-view').forEach(section=>section.hidden=section.id!==`${selected}-view`);document.querySelectorAll('.sidebar nav button').forEach(button=>button.classList.toggle('active',button.dataset.view===selected));if(updateUrl)history.replaceState(null,'',`#${selected}`);window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.sidebar nav button').forEach(button=>button.onclick=()=>showView(button.dataset.view));
+showView(location.hash.slice(1),false);
 render();

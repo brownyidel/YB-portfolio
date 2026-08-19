@@ -9,16 +9,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../shared/identity.css" />
   <script src="app.js" defer></script>
 </head>
 <body>
   <aside class="sidebar">
     <a class="logo" href="../../" aria-label="FlowPilot home">F<span>P</span></a>
     <nav aria-label="Workspace navigation">
-      <button class="active" data-target="top" aria-label="Dashboard"><span>⌂</span><b>Overview</b></button>
-      <button data-target="workflows" aria-label="Workflows"><span>⌁</span><b>Workflows</b></button>
-      <button data-target="templates" aria-label="Templates"><span>✦</span><b>Templates</b></button>
-      <button data-target="activity" aria-label="Activity"><span>◫</span><b>Activity</b></button>
+      <button class="active" data-view="overview" aria-label="Open overview"><span>⌂</span><b>Overview</b></button>
+      <button data-view="workflows" aria-label="Open workflows"><span>⌁</span><b>Workflows</b></button>
+      <button data-view="templates" aria-label="Open templates"><span>✦</span><b>Templates</b></button>
+      <button data-view="activity" aria-label="Open activity"><span>◫</span><b>Activity</b></button>
     </nav>
     <div class="sidebar-note"><i></i><span>Workspace online<small>Saved in this browser</small></span></div>
     <a class="back" href="../../">← Portfolio</a>
@@ -30,6 +31,7 @@
       <div class="head-actions"><button class="secondary" id="reset-demo">Reset demo</button><button class="primary" id="new-flow">+ New workflow</button></div>
     </header>
 
+    <div class="app-view" id="overview-view">
     <section class="metrics" aria-label="Automation metrics">
       <article><div><span>Active workflows</span><strong id="active-count">0</strong><small><i class="up">↗</i> Ready to run</small></div><div class="spark blue"><i></i><i></i><i></i><i></i><i></i></div></article>
       <article><div><span>Runs completed</span><strong id="run-count">0</strong><small><i class="up">↗</i> Across this device</small></div><div class="spark violet"><i></i><i></i><i></i><i></i><i></i></div></article>
@@ -47,21 +49,27 @@
       </div>
       <div class="designer-foot"><span><i class="trigger-dot"></i> Trigger</span><span><i class="condition-dot"></i> Condition</span><span><i class="action-dot"></i> Action</span><b>Estimated saving: 8 minutes per lead</b></div>
     </section>
+    </div>
 
-    <section class="section-head" id="templates"><div><span class="eyebrow">START FASTER</span><h2>Automation templates</h2><p>Install a ready-made workflow and customise it for your business.</p></div></section>
-    <section class="templates" id="template-list"></section>
+    <div class="app-view" id="templates-view" hidden>
+      <section class="section-head"><div><span class="eyebrow">START FASTER</span><h2>Automation templates</h2><p>Install a ready-made workflow and customise it for your business.</p></div></section>
+      <section class="templates" id="template-list"></section>
+    </div>
 
-    <section class="work-grid" id="workflows">
+    <section class="work-grid app-view" id="workflows-view" hidden>
       <article class="panel workflows-panel">
         <div class="panel-head"><div><span class="eyebrow">YOUR LIBRARY</span><h2>Workflows</h2><p>Search, filter, edit, duplicate, or run any automation.</p></div><button id="run-all">Run all active</button></div>
         <div class="toolbar"><label>⌕<input id="flow-search" placeholder="Search workflows" /></label><select id="flow-filter" aria-label="Filter workflows"><option value="all">All statuses</option><option value="active">Active</option><option value="paused">Paused</option></select></div>
         <div id="workflow-list" class="workflow-list"></div>
       </article>
-      <article class="panel activity-panel" id="activity">
+    </section>
+    <section class="work-grid single app-view" id="activity-view" hidden>
+      <article class="panel activity-panel">
         <div class="panel-head"><div><span class="eyebrow">AUDIT TRAIL</span><h2>Recent activity</h2><p>Every test and live run is recorded locally.</p></div><div><button class="quiet" id="export-log">Export</button><button class="quiet" id="clear-log">Clear</button></div></div>
         <div id="activity-list" class="activity-list"></div>
       </article>
     </section>
+    <a class="project-identity" href="../../" aria-label="Visit Yidel Brown's portfolio"><img src="../../assets/yb-logo.png" alt="Yidel Brown" /><span><strong>A Yidel Brown product</strong><small>Designed and developed by Yidel Brown</small></span><small class="identity-rights">© 2026 Yidel Brown. All rights reserved.</small></a>
   </main>
 
   <dialog id="flow-dialog">
