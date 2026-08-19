@@ -2,30 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="BriefBot is a live generative-AI project-planning assistant built by Yidel Brown." />
-  <title>BriefBot — Live AI Project Planning Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Chat naturally and research the live web with BriefBot, a friendly AI created by Yidel Brown." />
+  <meta name="theme-color" content="#f5f4fa" />
+  <title>BriefBot — Friendly AI Chat & Web Research</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260819.2" />
-  <link rel="stylesheet" href="../shared/identity.css?v=20260819.2" />
-  <script src="app.js?v=20260819.2" defer></script>
+  <link rel="stylesheet" href="style.css?v=20260819.5" />
+  <link rel="stylesheet" href="general-ai.css?v=20260819.5" />
+  <link rel="stylesheet" href="../shared/identity.css?v=20260819.5" />
+  <script src="app.js?v=20260819.5" defer></script>
 </head>
 <body>
-  <header><a href="../../" class="brand"><i>✦</i> briefbot</a><span><i></i> Live generative AI</span><div><button id="restart">↻ Start over</button><a href="../../">Portfolio ↗</a></div></header>
+  <header>
+    <a href="../../" class="brand" aria-label="BriefBot home"><i>✦</i> briefbot</a>
+    <span><i></i> Live AI + web research</span>
+    <div><button id="restart" type="button">↻ New chat</button><a href="../../">Portfolio ↗</a></div>
+  </header>
 
   <main>
-    <section class="intro"><span class="label">SELF-INITIATED PRODUCT SHOWCASE</span><h1>It listens first.<br />Then builds the <em>right brief.</em></h1><p>BriefBot now uses a real generative language model for natural conversation. It remembers the current chat, responds to what you actually say, and turns useful details into a practical project plan.</p><div class="trust"><span>✓ Genuine AI conversation</span><span>✓ Remembers the current chat</span><span>✓ Project-focused safety boundaries</span></div><div class="mind-visual" aria-hidden="true"><i class="orbit orbit-one"><b></b></i><i class="orbit orbit-two"><b></b></i><div class="robot"><span class="antenna"></span><div class="robot-face"><i></i><i></i><b></b></div><small>live AI online</small></div><span class="mind-label one">GOAL</span><span class="mind-label two">AUDIENCE</span><span class="mind-label three">SCOPE</span></div></section>
+    <section class="intro">
+      <div class="intro-copy">
+        <span class="label">FRIENDLY AI · LIVE RESEARCH</span>
+        <h1>Talk naturally.<br /><em>Explore anything.</em></h1>
+        <p>Schmooze, ask questions, improve your writing, explore an idea, or look up what is happening now. BriefBot responds to you—not a script—and shows source links when it searches the web.</p>
+        <div class="trust"><span>✓ Natural conversation</span><span>✓ Remembers this chat</span><span>✓ Sourced web research</span></div>
+      </div>
+      <div class="mind-visual" aria-hidden="true">
+        <i class="orbit orbit-one"><b></b></i><i class="orbit orbit-two"><b></b></i>
+        <div class="robot"><span class="antenna"></span><div class="robot-face"><i></i><i></i><b></b></div><small>ready to chat</small></div>
+        <span class="mind-label one">TALK</span><span class="mind-label two">SEARCH</span><span class="mind-label three">DISCOVER</span>
+      </div>
+    </section>
 
-    <section class="assistant-shell" id="chat"><div class="chat-card"><div class="chat-head"><div class="avatar"><span>✦</span></div><div><b>BriefBot</b><span><i></i> <span class="status-copy">Live generative AI</span></span></div><div class="progress-copy"><b id="progress-percent">0%</b><span>brief complete</span></div></div><div class="progress"><i id="progress-bar"></i></div><div id="messages" class="messages" aria-live="polite"></div><div id="quick-replies" class="quick-replies"></div><form id="chat-form"><input id="chat-input" autocomplete="off" placeholder="Talk to BriefBot naturally…" aria-label="Your message" maxlength="1000" /><button aria-label="Send message">↑</button></form><div class="chat-tools"><small>Messages are processed by a secure AI service and are not used for research inside this demo.</small><button id="generate-plan" type="button" disabled>Generate project plan</button></div></div>
+    <section class="assistant-shell general-chat" id="chat">
+      <div class="chat-card">
+        <div class="chat-head">
+          <div class="avatar"><span>✦</span></div>
+          <div class="bot-presence"><b>BriefBot</b><span><i></i> <span class="status-copy">Online and ready</span></span></div>
+          <div class="chat-head-actions">
+            <button id="research-toggle" class="research-toggle" type="button" aria-pressed="false" title="Search the live web for the next answer"><span>◎</span> Web search</button>
+            <div class="conversation-copy"><b id="message-count">0</b><span>messages</span></div>
+          </div>
+        </div>
+        <div class="research-note"><span>◎</span><p><b>Live research is available.</b> BriefBot searches automatically for current topics, or tap <strong>Web search</strong> to force it for your next message.</p></div>
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <div id="quick-replies" class="quick-replies" aria-label="Suggested messages"></div>
+        <form id="chat-form">
+          <input id="chat-input" autocomplete="off" placeholder="Message BriefBot…" aria-label="Your message" maxlength="1200" />
+          <button aria-label="Send message">↑</button>
+        </form>
+        <div class="chat-tools"><small>AI can make mistakes. Open the source links for important information, and don’t share private or sensitive details.</small></div>
+      </div>
 
-      <aside class="context-card"><div class="context-head"><span class="label">LIVE UNDERSTANDING</span><span id="memory-count">0 details</span></div><h2>What BriefBot knows</h2><div id="context-list" class="context-list"></div><div class="confidence"><div><span>Context confidence</span><b id="confidence-copy">Listening…</b></div><div><i id="confidence-bar"></i></div></div><p><i>✦</i> This panel updates as you talk. BriefBot uses these details to avoid repeating questions.</p></aside></section>
+      <aside class="context-card chat-guide">
+        <div class="context-head"><span class="label">CHAT YOUR WAY</span><span>Friendly AI</span></div>
+        <h2>One chat, many uses.</h2>
+        <div class="capability-list">
+          <div><i>✦</i><span><b>Everyday chat</b><small>Have a relaxed, friendly conversation.</small></span></div>
+          <div><i>◎</i><span><b>Live research</b><small>Search current information with clickable sources.</small></span></div>
+          <div><i>?</i><span><b>Clear answers</b><small>Understand difficult ideas in plain language.</small></span></div>
+          <div><i>✎</i><span><b>Writing help</b><small>Draft, rewrite, shorten, or improve text.</small></span></div>
+          <div><i>&lt;/&gt;</i><span><b>Technical help</b><small>Discuss code and solve practical problems.</small></span></div>
+        </div>
+        <p><i>✦</i> BriefBot remembers messages in this chat and clearly labels the sources it finds online.</p>
+      </aside>
+    </section>
 
-    <section class="brief" id="brief" hidden><div class="brief-head"><div><span class="label">AI-ASSISTED PROJECT PLAN</span><h2 id="brief-title">Your project brief</h2><p id="brief-summary"></p></div><div><button id="refine">✦ Refine with BriefBot</button><button id="copy">Copy brief</button></div></div><div class="brief-overview" id="brief-overview"></div><div class="brief-grid"><article><span class="label">RECOMMENDED FEATURES</span><div id="recommended-features" class="feature-list"></div></article><article><span class="label">DELIVERY ROADMAP</span><div id="roadmap" class="roadmap"></div></article><article><span class="label">SCOPE GUIDANCE</span><div id="scope-guidance" class="scope-guidance"></div></article></div><div class="brief-actions"><div><button id="download">Download .txt</button><button id="print">Print / Save PDF</button></div><a href="https://www.fiverr.com/yidelbrown213" target="_blank" rel="noreferrer">Discuss this plan with Yidel ↗</a></div></section>
-    <a class="project-identity" href="../../" aria-label="Visit Yidel Brown's portfolio"><img src="../../assets/yb-logo.png" alt="Yidel Brown" /><span><strong>A Yidel Brown product</strong><small>Designed and developed by Yidel Brown</small></span><small class="identity-rights">© 2026 Yidel Brown. All rights reserved.</small></a>
+    <a class="project-identity" href="../../" aria-label="Visit Yidel Brown's portfolio"><img src="../../assets/yb-logo.png" alt="Yidel Brown" /><span><strong>Created by Yidel Brown</strong><small>Friendly AI chat and sourced web research, designed and developed by Yidel Brown</small></span><small class="identity-rights">© 2026 Yidel Brown. All rights reserved.</small></a>
   </main>
 
-  <footer><span>Designed and developed by Yidel Brown</span><span>Conversation is generated by a live AI model; project context remains visible so you can see what it remembers.</span></footer><div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <footer><span>Designed and developed by Yidel Brown</span><span>Conversation is generated by live AI. BriefBot is not human and may occasionally be mistaken.</span></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

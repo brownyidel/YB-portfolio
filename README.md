@@ -10,7 +10,7 @@ The showcased projects are complete, self-initiated practice builds. Each one is
 - **Table & Thyme** — premium restaurant website with a filterable seasonal menu and working reservation flow
 - **TidyData** — private browser-based CSV inspector, cleaner, previewer, and exporter
 - **Stockroom** — inventory manager with product CRUD, quantity controls, stock alerts, search, filtering, and CSV export
-- **BriefBot** — guided discovery chatbot that generates a structured, copyable project brief
+- **BriefBot** — friendly generative-AI chat with conversation memory, optional live web research, and visible source links
 
 ## Live website
 
