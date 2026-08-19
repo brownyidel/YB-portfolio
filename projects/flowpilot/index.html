@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="FlowPilot is a working browser-based workflow automation demo by Yidel Brown." />
+  <title>FlowPilot — Workflow Automation Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="enhancements.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="logo" href="../../">F<span>P</span></a>
+    <nav><button class="active" aria-label="Dashboard">⌂</button><button aria-label="Workflows">⌁</button><button aria-label="Activity">◫</button></nav>
+    <a class="back" href="../../" aria-label="Back to portfolio">←</a>
+  </aside>
+  <main>
+    <header><div><small>SELF-INITIATED PRACTICE PROJECT</small><h1>Workflow overview</h1><p>Build, run, and monitor lightweight business automations.</p></div><button class="primary" id="new-flow">+ New workflow</button></header>
+    <section class="metrics"><article><span>Active workflows</span><strong id="active-count">0</strong><small>Ready to run</small></article><article><span>Runs completed</span><strong id="run-count">0</strong><small>Saved locally</small></article><article><span>Estimated time saved</span><strong><span id="hours-saved">0</span>h</strong><small>Across all runs</small></article></section>
+    <section class="flow-builder panel">
+      <div class="builder-head"><div><small>VISUAL AUTOMATION</small><h2>New customer welcome flow</h2><p>See each step of the automation, then run a live test.</p></div><div><span class="saved">● All changes saved</span><button id="test-flow">▶ Run test</button></div></div>
+      <div class="canvas">
+        <article class="node trigger"><span>TRIGGER</span><i>↯</i><div><b>New form response</b><small>Website enquiry form</small></div><em>✓</em></article><div class="path"><i></i><span>instantly</span></div>
+        <article class="node condition"><span>CONDITION</span><i>⌘</i><div><b>Lead has an email</b><small>Continue if email is present</small></div><em>✓</em></article><div class="path"><i></i><span>if yes</span></div>
+        <article class="node action"><span>ACTION</span><i>✉</i><div><b>Send welcome email</b><small>Personalised response template</small></div><em>✓</em></article>
+      </div>
+      <div class="builder-foot"><span><i></i> Trigger</span><span><i></i> Condition</span><span><i></i> Action</span><b>Estimated saving: 8 minutes per lead</b></div>
+    </section>
+    <section class="workspace">
+      <div class="panel"><div class="panel-title"><div><h2>Your workflows</h2><p>Toggle a workflow or run it on demand.</p></div><button id="run-all">Run active</button></div><div id="workflow-list" class="workflow-list"></div></div>
+      <div class="panel activity-panel"><div class="panel-title"><div><h2>Live activity</h2><p>Latest automation events.</p></div><button class="quiet" id="clear-log">Clear</button></div><div id="activity-list" class="activity-list"></div></div>
+    </section>
+  </main>
+  <dialog id="flow-dialog"><form method="dialog" id="flow-form"><div class="dialog-head"><div><small>NEW AUTOMATION</small><h2>Create a workflow</h2></div><button value="cancel" aria-label="Close">×</button></div><label>Workflow name<input id="flow-name" required maxlength="40" placeholder="e.g. Send weekly report" /></label><label>Trigger<select id="flow-trigger"><option>Every weekday at 9:00</option><option>When a form is submitted</option><option>When a file is uploaded</option><option>On demand</option></select></label><label>Action<select id="flow-action"><option>Send an email summary</option><option>Add a spreadsheet row</option><option>Create a follow-up task</option><option>Transform and export data</option></select></label><div class="dialog-actions"><button value="cancel">Cancel</button><button class="primary" value="default" id="save-flow">Create workflow</button></div></form></dialog>
+  <div class="toast" id="toast" role="status"></div>
+</body>
+</html>

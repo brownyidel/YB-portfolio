@@ -2,7 +2,15 @@
 
 Personal portfolio for **Yidel Brown — Web Developer & Automation Specialist**.
 
-The showcased projects are self-initiated demonstrations created to present web development, JavaScript automation, API integration, data-processing, and debugging capabilities. They are not represented as paid client work.
+The showcased projects are complete, self-initiated practice builds. Each one is live and interactive, but none is represented as paid client work.
+
+## Live practice projects
+
+- **FlowPilot** — visual workflow automation studio with reusable workflows, live runs, activity history, and local persistence
+- **Table & Thyme** — premium restaurant website with a filterable seasonal menu and working reservation flow
+- **TidyData** — private browser-based CSV inspector, cleaner, previewer, and exporter
+- **Stockroom** — inventory manager with product CRUD, quantity controls, stock alerts, search, filtering, and CSV export
+- **BriefBot** — guided discovery chatbot that generates a structured, copyable project brief
 
 ## Live website
 
