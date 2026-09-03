@@ -1,3 +1,22 @@
+const premiumStyle = document.createElement('link');
+premiumStyle.rel = 'stylesheet';
+premiumStyle.href = 'portfolio-v7.css?v=20260904.1';
+document.head.appendChild(premiumStyle);
+
+const domainBar = document.createElement('div');
+domainBar.className = 'domain-bar';
+domainBar.innerHTML = `
+  <div class="domain-crumbs">
+    <a href="https://yidel.dev/">Yidel.dev</a>
+    <i>/</i>
+    <strong>Portfolio</strong>
+  </div>
+  <div class="domain-status"><i></i> Selected live work · Yidel Brown</div>
+`;
+const skipLink = document.querySelector('.skip-link');
+if (skipLink) skipLink.insertAdjacentElement('afterend', domainBar);
+else document.body.prepend(domainBar);
+
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.site-header nav');
 const progressBar = document.getElementById('scroll-progress-bar');
